@@ -24,16 +24,16 @@
         </div>
 
     </div>
-    <div id="myDiv" class="todos" style="display:none">
-        <form id="todo-form" method="POST">
-            <h2 id="details">Players</h2><br>
-            <button id="goBack">Go Back</button><br><br>
-            <label id="final score" for="todo-text">Your score is: </label>
-            <label id="final score" for="todo-text">Add your Initials</label>
-            <input type="text" placeholder="Initials" name="todo-text" id="todo-text">
-        </form>
-        <p>Total Players Count: <span id="todo-count">0</span></p>
-        <ul id="todo-list"></ul>
+    <div id="myDiv" class="container text-center" style="display:none">
+      <form id="todo-form" method="POST">
+        <label for="todo-text">Add your Initials: </label>
+        <input type="text" placeholder="Initials" name="player-name" id="playerName">
+        <button id="goBack">Go Back</button><br><br>
+        <p id="finalScore"></p>
+        <br>
+      </form>
+      <p>Players: <span id="playerCount">0</span></p>
+      <ul id="todo-list"></ul>
     </div>
     <div id="quizQuestionsDiv" style="display:none">
         <h4 id="questionTitle"></h4>

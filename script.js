@@ -2,6 +2,8 @@ var viewScore = document.getElementById("viewscore");
 var finalPage = document.getElementById("myDiv");
 var counter = document.getElementById("countdown");
 var startQuiz = document.getElementById("random-button");
+var playerName = document.getElementById("playerName");
+var finalScore = document.getElementById("finalScore");
 var quizQuestionsDiv = document.getElementById("quizQuestionsDiv");
 var rightOrWrong = document.getElementById("correctChoice");
 var questionTitle = document.getElementById("questionTitle");
@@ -33,6 +35,7 @@ function hideQuizPage() {
 function showFinalPage() {
     quizQuestionsDiv.setAttribute("style", "display: none");
     finalPage.setAttribute("style", "display: block");
+    finalScore.textContent = "Your final score is " + secondsLeft;
 }
 
 function displayQuizQuestions() {
@@ -91,71 +94,65 @@ for (var i = 0; i <optionBtns.length; i++){
         displayQuizQuestions()
     })
 }
-var todoInput = document.querySelector("#todo-text");
+var todoInput = documnent.querySelector("#todo-text");
 var todoForm = document.querySelector("#todo-form");
 var todoList = document.querySelector("#todoList");
-var todoCountSpan = document.querySelector("#todo-count");
+var playerCount = document.querySelector("#playerCount");
+var submitScore = document.getElementById("submitScore");
 
-var todos = [];
+var players = [];
 
-init();
+renderPlayers();
 
-function renderTodos() {
+function renderPlayers() {
     todoList.innerHTML = "";
-    todoCountSpan.textContent = todos.length;
+    playerCount.textContent = players.length;
 
-    for (var i =0; i < todos.length; i++) {
-        var todo = todos[i];
+    for (var i = 0; i < players.length; i++) {
+        var player = players[i];
 
         var li = document.createElement("li");
-        li.textContent = todo;
+        li.textContent = player;
         li.setAttribute("data-index", i);
 
-        var button = document.createElement("button");
-        button.textContent = "Delete";
+        var button = document.createElement("button")
+        button.textContent = "Submit";
 
         li.appendChild(button);
         todoList.appendChild(li);
     }
 }
 
+init();
+
 function init() {
-    var storedTodos = JSON.parse(localStorage.getItem("todos"));
+    var storedPlayers = JSON.parse(localStorage.getItem("players"));
 
-    if (storedTodos !== null) {
-        todos = storedTodos;
+    if (storedPlayers !== null) {
+        players = storedPlayers;
     }
-    renderTodos();
+
+    renderPlayers();
 }
 
-function storeTodos() {
-    localStorage.setItem("todos", JSON.stringify(todos));
+function storePlayers() {
+
+    localStorage.setItem("players", JSON.stringify(players));
 }
 
-todoForm.addEventListener("submit", function(event){
+
+todoForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    var todoText = todoInput.nodeValue.trim();
+    var todoText = todoInput.value.trim();
 
     if (todoText === "") {
         return;
     }
 
-    todo.push(todoText);
+    players.push(todoText);
     todoInput.value = "";
 
-    storeTodos();
-    renderTodos();
+    storePlayers();
+    renderPlayers();
 });
-
-todoList.addEventListener("click", function(event) {
-    var element = event.target;
-
-    if (element.matches("button") === true) {
-        var index = element.parentElement.getAttribute("data-index");
-        todos.splice(index, 1);
-
-        storeTodos();
-        renderTodos();
-    }
-})
